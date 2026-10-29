@@ -117,17 +117,6 @@ body {
   }
 }
 
-@keyframes wavePulseGlow {
-  0%, 100% {
-    opacity: 0.85;
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 12px currentColor);
-  }
-}
-
 .animate-wave-flow-1 {
   animation: waveFlowLeftToRight 5s linear infinite;
   will-change: transform;
@@ -146,6 +135,47 @@ body {
 .animate-wave-flow-4 {
   animation: waveFlowLeftToRight 4.5s linear infinite;
   will-change: transform;
+}
+
+/* ==========================================================================
+   DOT MATRIX TELEMETRY STREAM MOTION
+   ========================================================================== */
+@keyframes dotMatrixWaveSweep {
+  0% {
+    background-color: rgba(76, 29, 149, 0.4);
+    opacity: 0.4;
+    transform: scale(0.9);
+    box-shadow: none;
+  }
+  25% {
+    background-color: #a855f7;
+    opacity: 0.85;
+    transform: scale(1.15);
+    box-shadow: 0 0 6px rgba(168, 85, 247, 0.6);
+  }
+  45% {
+    background-color: #f472b6;
+    opacity: 1;
+    transform: scale(1.25);
+    box-shadow: 0 0 10px rgba(244, 114, 182, 0.9);
+  }
+  70% {
+    background-color: #c084fc;
+    opacity: 0.85;
+    transform: scale(1.15);
+    box-shadow: 0 0 6px rgba(192, 132, 252, 0.6);
+  }
+  100% {
+    background-color: rgba(76, 29, 149, 0.4);
+    opacity: 0.4;
+    transform: scale(0.9);
+    box-shadow: none;
+  }
+}
+
+.animate-matrix-dot {
+  animation: dotMatrixWaveSweep 3.6s ease-in-out infinite;
+  will-change: transform, opacity, background-color;
 }
 
 /* ==========================================================================
