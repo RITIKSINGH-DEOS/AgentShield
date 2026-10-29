@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CheckCircle2, ShieldAlert, Zap, Users, Play, Loader2 } from "lucide-react";
+import { Play, CheckCircle2, ShieldAlert, Zap, Users, Loader2 } from "lucide-react";
 import { ScenarioResult } from "@/types";
 
 interface ScenarioBarProps {
@@ -18,63 +18,53 @@ export default function ScenarioBar({
   const scenarios = [
     {
       id: "SCENARIO_01_HAPPY_PATH",
-      title: "Scenario 1: Legitimate Procurement",
-      desc: "H100 GPU compute reserve ($14.20) verified via PoI & settled instantly via PayPal.",
+      title: "Legitimate Compute",
+      cost: "$14.20",
+      tag: "PayPal Settle",
       icon: CheckCircle2,
-      color: "border-emerald-500/30 hover:border-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-400",
-      btnColor: "bg-emerald-500 text-black hover:bg-emerald-400",
-      badge: "HAPPY PATH",
-      badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
     },
     {
       id: "SCENARIO_02_INJECTION",
-      title: "Scenario 2: Adversarial Injection",
-      desc: "Attacker payload attempts $45.00 diversion; AI Firewall intercepts & quarantines in <18ms.",
+      title: "Adversarial Injection",
+      cost: "Defended",
+      tag: "<18ms Quarantine",
       icon: ShieldAlert,
-      color: "border-danger/30 hover:border-danger bg-danger/5 hover:bg-danger/10 text-danger",
-      btnColor: "bg-danger text-white hover:bg-red-500",
-      badge: "THREAT DEFENSE",
-      badgeColor: "bg-danger/20 text-danger border-danger/40",
+      badgeColor: "bg-danger/15 text-danger border-danger/30",
     },
     {
       id: "SCENARIO_03_CIRCUIT_TRIP",
-      title: "Scenario 3: Recursive Overrun Trip",
-      desc: "Infinite spend loop detected; Velocity circuit breaker activates emergency kill-switch.",
+      title: "Recursive Spend Overrun",
+      cost: "50 calls / 3s",
+      tag: "Kill-Switch Trip",
       icon: Zap,
-      color: "border-warning/30 hover:border-warning bg-warning/5 hover:bg-warning/10 text-warning",
-      btnColor: "bg-warning text-black hover:bg-amber-400",
-      badge: "CIRCUIT BREAKER",
-      badgeColor: "bg-warning/20 text-warning border-warning/40",
+      badgeColor: "bg-warning/15 text-warning border-warning/30",
     },
     {
       id: "SCENARIO_04_MULTI_AGENT_SPLIT",
-      title: "Scenario 4: Multi-Agent Split",
-      desc: "3-agent consortium milestone settlement ($100.00) disbursed atomically via PayPal Payouts.",
+      title: "Multi-Agent Split",
+      cost: "$100.00",
+      tag: "3-Way Batch",
       icon: Users,
-      color: "border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400",
-      btnColor: "bg-blue-500 text-white hover:bg-blue-400",
-      badge: "CONSORTIUM",
-      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+      badgeColor: "bg-brand-purple/15 text-purple-300 border-brand-purple/30",
     },
   ];
 
   return (
     <div className="space-y-3">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-sm font-semibold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-            <span>⚡ Evaluator 60-Second Interactive Scenarios</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/20 font-mono">
-              1-Click Live Test
-            </span>
-          </h2>
-          <p className="text-xs text-slate-400">
-            Click any scenario to execute live agent behavior through the firewall and PayPal sandbox.
-          </p>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-brand-violet animate-pulse" />
+          <h3 className="text-xs font-semibold text-purple-200/80 uppercase tracking-wider">
+            Evaluator Scenarios
+          </h3>
         </div>
+        <span className="text-[11px] text-purple-300/40 font-mono">1-Click Live Execution</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+      {/* Clean 4-Card Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {scenarios.map((sc) => {
           const Icon = sc.icon;
           const isRunning = runningScenario === sc.id;
@@ -82,35 +72,36 @@ export default function ScenarioBar({
           return (
             <div
               key={sc.id}
-              className={`p-3.5 rounded-xl border transition-all duration-200 flex flex-col justify-between ${sc.color}`}
+              className="p-4 rounded-2xl glass-card glass-card-hover transition-all duration-200 flex flex-col justify-between"
             >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded border uppercase ${sc.badgeColor}`}>
-                    {sc.badge}
-                  </span>
+              <div className="flex items-start justify-between mb-3">
+                <div className="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300">
                   <Icon className="w-4 h-4" />
                 </div>
-                <h3 className="text-xs font-bold text-white mb-1">{sc.title}</h3>
-                <p className="text-[11px] text-slate-400 leading-relaxed mb-3">{sc.desc}</p>
+                <span className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded-full border ${sc.badgeColor}`}>
+                  {sc.tag}
+                </span>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-bold text-white mb-0.5">{sc.title}</h4>
+                <span className="text-xs font-mono text-purple-300/70">{sc.cost}</span>
               </div>
 
               <button
                 onClick={() => onRunScenario(sc.id)}
                 disabled={runningScenario !== null}
-                className={`w-full py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm ${sc.btnColor} ${
-                  runningScenario !== null ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className="mt-3 w-full py-1.5 px-3 rounded-xl bg-surface-border hover:bg-brand-violet hover:text-white text-xs font-medium text-purple-200 flex items-center justify-center gap-1.5 transition-all"
               >
                 {isRunning ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <Loader2 className="w-3 h-3 animate-spin" />
                     <span>Executing...</span>
                   </>
                 ) : (
                   <>
-                    <Play className="w-3 h-3 fill-current" />
-                    <span>Trigger Scenario</span>
+                    <Play className="w-2.5 h-2.5 fill-current" />
+                    <span>Trigger</span>
                   </>
                 )}
               </button>
@@ -119,15 +110,15 @@ export default function ScenarioBar({
         })}
       </div>
 
-      {/* Dynamic Scenario Outcome Toast */}
+      {/* Outcome Toast */}
       {lastResult && (
-        <div className="p-3 rounded-xl bg-surface-card border border-surface-border text-xs flex items-center justify-between gap-3 animate-fadeIn">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
+        <div className="p-3 rounded-2xl glass-card text-xs flex items-center justify-between gap-3 animate-fadeIn border-purple-500/20">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand-purple animate-ping" />
             <span className="font-semibold text-white">{lastResult.title}:</span>
-            <span className="text-slate-300">{lastResult.summary}</span>
+            <span className="text-purple-300/70">{lastResult.summary}</span>
           </div>
-          <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface border border-surface-border text-cyan-300">
+          <span className="font-mono text-[10px] px-2 py-0.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-200">
             {lastResult.outcome}
           </span>
         </div>

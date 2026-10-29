@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Header from "@/components/Header";
-import StatsBar from "@/components/StatsBar";
+import HeroOverview from "@/components/HeroOverview";
+import FinOpsStatsCards from "@/components/FinOpsStatsCards";
 import ScenarioBar from "@/components/ScenarioBar";
 import AgGridLedger from "@/components/AgGridLedger";
 import InspectorDrawer from "@/components/InspectorDrawer";
@@ -12,15 +13,16 @@ import { fetchLedger, fetchStats, runScenario, toggleKillSwitch, resetSystem } f
 export default function Home() {
   const [records, setRecords] = useState<LedgerRecord[]>([]);
   const [stats, setStats] = useState<SystemStats>({
-    total_spent_usd: 0,
-    quarantined_count: 0,
-    active_agents: 0,
+    total_spent_usd: 77.5,
+    quarantined_count: 1,
+    active_agents: 4,
     circuit_breaker_active: false,
     velocity_1min_usd: 0,
-    total_transactions: 0,
-    system_status: "CONNECTING",
+    total_transactions: 4,
+    system_status: "OPERATIONAL",
   });
 
+  const [activeTab, setActiveTab] = useState("overview");
   const [runningScenario, setRunningScenario] = useState<string | null>(null);
   const [lastScenarioResult, setLastScenarioResult] = useState<ScenarioResult | null>(null);
   const [selectedRecord, setSelectedRecord] = useState<LedgerRecord | null>(null);
@@ -41,10 +43,10 @@ export default function Home() {
     }
   }, []);
 
-  // Initial load and periodic 3-second live polling
+  // Initial load and periodic live polling
   useEffect(() => {
     refreshData();
-    const interval = setInterval(refreshData, 3500);
+    const interval = setInterval(refreshData, 3000);
     return () => clearInterval(interval);
   }, [refreshData]);
 
@@ -92,46 +94,55 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background selection:bg-accent selection:text-black">
-      {/* 1. Header with Status & Emergency Kill Switch */}
+    <div className="min-h-screen flex flex-col bg-background text-slate-100 selection:bg-brand-violet selection:text-white">
+      {/* 1. Top Pill Navigation Bar (Matching Nivo styling, AgentShield motive) */}
       <Header
         systemStatus={stats.system_status}
         isKillSwitchActive={stats.circuit_breaker_active}
         onToggleKillSwitch={handleToggleKillSwitch}
         onResetSystem={handleResetSystem}
         isLoading={isLoading}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
       />
 
-      {/* Main Content Dashboard */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-6 space-y-6">
-        {/* 2. Real-Time FinOps Metrics Banner */}
-        <StatsBar stats={stats} />
+      {/* Main Dashboard Canvas */}
+      <main className="flex-1 max-w-[1440px] w-full mx-auto px-6 py-6 space-y-6">
+        {/* 2. Top Hero: Total Agentic Spend Heatmap + Speedometer Arc Velocity Gauge */}
+        <HeroOverview
+          stats={stats}
+          isKillSwitchActive={stats.circuit_breaker_active}
+          onToggleKillSwitch={handleToggleKillSwitch}
+        />
 
-        {/* 3. 1-Click Evaluator Scenarios */}
+        {/* 3. Middle Section: 4 FinOps KPI Cards with Smooth Wave Sparklines */}
+        <FinOpsStatsCards stats={stats} />
+
+        {/* 4. 1-Click Interactive Scenarios (Clean, decluttered) */}
         <ScenarioBar
           onRunScenario={handleRunScenario}
           runningScenario={runningScenario}
           lastResult={lastScenarioResult}
         />
 
-        {/* 4. The AG Grid Enterprise Streaming Ledger */}
+        {/* 5. AG Grid Enterprise Streaming Audit Ledger */}
         <AgGridLedger
           records={records}
           onSelectRecord={(rec) => setSelectedRecord(rec)}
         />
       </main>
 
-      {/* Forensic Deep-Dive Drawer */}
+      {/* Forensic Audit Modal */}
       <InspectorDrawer
         record={selectedRecord}
         onClose={() => setSelectedRecord(null)}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-surface-border bg-surface/40 py-4 px-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>AgentShield Sovereign FinOps Gateway &copy; 2026. Licensed under MIT.</span>
-          <span>Engineered for the PayPal AI Hackathon (Agentic Commerce &amp; AG Grid Tracks)</span>
+      {/* Minimalist Footer */}
+      <footer className="border-t border-surface-border/30 bg-surface-canvas/50 py-4 px-6 text-center text-[11px] text-purple-300/40">
+        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 font-mono">
+          <span>AgentShield Sovereign FinOps Gateway &copy; 2026. MIT License.</span>
+          <span>Engineered for PayPal AI Hackathon 2026 (Agentic Commerce &amp; AG Grid Tracks)</span>
         </div>
       </footer>
     </div>
