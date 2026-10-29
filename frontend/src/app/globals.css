@@ -6,8 +6,8 @@
 @import "ag-grid-community/styles/ag-theme-quartz.css";
 
 :root {
-  --background: #090615;
-  --foreground: #f3f4f8;
+  --background: #160e29;
+  --foreground: #f8f9fc;
 }
 
 body {
@@ -19,51 +19,51 @@ body {
 }
 
 /* ==========================================================================
-   ULTRA-LUXURY 3D GLASSMORPHISM & SPECULAR LIGHTING
+   BRIGHTENED LUXURY 3D GLASSMORPHISM & SPECULAR LIGHTING
    ========================================================================== */
 
-/* 1. Ambient 3D Glass Surface */
+/* 1. Ambient 3D Glass Surface (Luminous Violet) */
 .glass-card {
   position: relative;
   background: linear-gradient(
     135deg,
-    rgba(28, 22, 54, 0.75) 0%,
-    rgba(16, 12, 34, 0.65) 100%
+    rgba(38, 26, 74, 0.82) 0%,
+    rgba(25, 17, 50, 0.75) 100%
   );
-  backdrop-filter: blur(24px) saturate(170%);
-  -webkit-backdrop-filter: blur(24px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(168, 85, 247, 0.22);
   box-shadow: 
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4),
-    0 16px 36px -12px rgba(0, 0, 0, 0.65),
-    0 4px 12px -2px rgba(10, 7, 22, 0.5);
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35),
+    0 16px 36px -10px rgba(10, 5, 24, 0.55),
+    0 4px 14px -2px rgba(22, 14, 45, 0.45);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow, border-color;
 }
 
-/* 2. Specular Top Rim Reflection (Creates realistic physical glass edge) */
+/* 2. Specular Top Rim Reflection */
 .glass-card::after {
   content: "";
   position: absolute;
   top: 0;
-  left: 24px;
-  right: 24px;
+  left: 20px;
+  right: 20px;
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.28) 40%,
-    rgba(216, 180, 254, 0.4) 60%,
+    rgba(255, 255, 255, 0.45) 35%,
+    rgba(216, 180, 254, 0.7) 65%,
     transparent 100%
   );
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.85;
   transition: opacity 0.35s ease, background 0.35s ease;
   border-radius: 9999px;
 }
 
-/* 3. 3D Cursor Hover Elevation & Amethyst Aura */
+/* 3. 3D Cursor Hover Elevation & Vibrant Violet Glow */
 .glass-card-interactive {
   cursor: pointer;
 }
@@ -72,15 +72,15 @@ body {
   transform: translateY(-4px) scale(1.006);
   background: linear-gradient(
     135deg,
-    rgba(36, 27, 72, 0.85) 0%,
-    rgba(22, 16, 44, 0.78) 100%
+    rgba(50, 34, 98, 0.92) 0%,
+    rgba(33, 22, 66, 0.85) 100%
   );
-  border-color: rgba(168, 85, 247, 0.35);
+  border-color: rgba(192, 132, 252, 0.5);
   box-shadow: 
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5),
-    0 24px 55px -10px rgba(0, 0, 0, 0.8),
-    0 0 35px -5px rgba(168, 85, 247, 0.28);
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4),
+    0 24px 55px -8px rgba(12, 6, 28, 0.75),
+    0 0 35px -3px rgba(168, 85, 247, 0.4);
 }
 
 .glass-card-interactive:hover::after {
@@ -88,8 +88,8 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.5) 30%,
-    rgba(216, 180, 254, 0.8) 70%,
+    rgba(255, 255, 255, 0.65) 30%,
+    rgba(216, 180, 254, 0.95) 70%,
     transparent 100%
   );
 }
@@ -97,25 +97,25 @@ body {
 /* 4. Luxury Pill Buttons */
 .interactive-pill {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .interactive-pill:hover {
   transform: translateY(-1.5px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(139, 92, 246, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 24px rgba(168, 85, 247, 0.45);
 }
 
 /* ==========================================================================
-   CUSTOM AG GRID LUXURY PURPLE QUARTZ OVERRIDES
+   CUSTOM AG GRID LUXURY PURPLE QUARTZ OVERRIDES (BRIGHTENED)
    ========================================================================== */
 .ag-theme-quartz-dark {
-  --ag-background-color: #120e24;
-  --ag-header-background-color: #181330;
-  --ag-header-foreground-color: #a78bfa;
-  --ag-border-color: rgba(168, 85, 247, 0.15);
-  --ag-row-hover-color: rgba(168, 85, 247, 0.08);
-  --ag-selected-row-background-color: rgba(168, 85, 247, 0.15);
-  --ag-odd-row-background-color: #120e24;
+  --ag-background-color: #1c133a;
+  --ag-header-background-color: #271a52;
+  --ag-header-foreground-color: #d8b4fe;
+  --ag-border-color: rgba(168, 85, 247, 0.22);
+  --ag-row-hover-color: rgba(168, 85, 247, 0.15);
+  --ag-selected-row-background-color: rgba(168, 85, 247, 0.25);
+  --ag-odd-row-background-color: #1c133a;
   --ag-font-family: inherit;
   --ag-font-size: 12.5px;
   --ag-row-height: 52px;
@@ -123,10 +123,10 @@ body {
   --ag-cell-horizontal-padding: 14px;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.22);
   box-shadow: 
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-    0 20px 45px -15px rgba(0, 0, 0, 0.7);
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+    0 20px 45px -12px rgba(10, 5, 25, 0.65);
 }
 
 .ag-theme-quartz-dark .ag-header-cell {
@@ -134,7 +134,7 @@ body {
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #c4b5fd;
+  color: #e9d5ff;
 }
 
 .ag-theme-quartz-dark .ag-header-cell-label {
@@ -145,12 +145,12 @@ body {
 .ag-theme-quartz-dark .ag-cell {
   display: flex !important;
   align-items: center !important;
-  border-bottom: 1px solid rgba(168, 85, 247, 0.08);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.12);
   line-height: normal;
 }
 
 .ag-theme-quartz-dark .ag-row {
-  border-bottom: 1px solid rgba(168, 85, 247, 0.08);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.12);
   transition: background-color 0.15s ease;
 }
 
@@ -160,21 +160,21 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090615;
+  background: #160e29;
 }
 ::-webkit-scrollbar-thumb {
-  background: #282046;
+  background: #3b276b;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4c1d95;
+  background: #5b21b6;
 }
 
 /* Glowing Elements */
 .glow-purple {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 35px rgba(168, 85, 247, 0.45);
 }
 
 .glow-pill {
-  box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.55);
 }

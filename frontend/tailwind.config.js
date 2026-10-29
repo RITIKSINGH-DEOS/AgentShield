@@ -9,12 +9,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#0c0919",
-        "surface-canvas": "#110d22",
-        "surface-card": "#17132c",
-        "surface-card-hover": "#1e1938",
-        "surface-border": "#282046",
-        "surface-border-light": "rgba(255, 255, 255, 0.07)",
+        background: "#160e29",
+        "surface-canvas": "#1d1338",
+        "surface-card": "#261a48",
+        "surface-card-hover": "#332261",
+        "surface-border": "#452e7c",
+        "surface-border-light": "rgba(255, 255, 255, 0.12)",
         "brand-violet": "#8b5cf6",
         "brand-purple": "#a855f7",
         "brand-fuchsia": "#d946ef",
@@ -35,8 +35,8 @@ module.exports = {
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        "purple-glow": "0 0 35px -5px rgba(139, 92, 246, 0.3)",
-        "card-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+        "purple-glow": "0 0 35px -5px rgba(168, 85, 247, 0.4)",
+        "card-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.35)",
       },
     },
   },

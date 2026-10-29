@@ -97,17 +97,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-slate-100 selection:bg-brand-violet selection:text-white relative overflow-hidden">
-      {/* 3D Ambient Glowing Mesh Background (Reflects through frosted glass) */}
+      {/* 3D Radiant Ambient Glowing Mesh (Luminous Violet & Fuchsia Atmosphere) */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div
-          className="absolute -top-40 left-1/4 w-[650px] h-[650px] bg-brand-violet/12 rounded-full blur-[140px] animate-pulse"
+          className="absolute -top-32 left-1/4 w-[750px] h-[750px] bg-purple-600/25 rounded-full blur-[140px] animate-pulse"
           style={{ animationDuration: "8s" }}
         />
         <div
-          className="absolute top-1/3 -right-20 w-[550px] h-[550px] bg-brand-fuchsia/10 rounded-full blur-[150px] animate-pulse"
+          className="absolute top-1/4 -right-10 w-[650px] h-[650px] bg-fuchsia-600/20 rounded-full blur-[150px] animate-pulse"
           style={{ animationDuration: "10s" }}
         />
-        <div className="absolute -bottom-20 left-1/3 w-[600px] h-[600px] bg-purple-900/15 rounded-full blur-[160px]" />
+        <div className="absolute -bottom-10 left-1/3 w-[700px] h-[700px] bg-violet-600/22 rounded-full blur-[160px]" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
@@ -140,7 +140,7 @@ export default function Home() {
               {/* Bottom Grid: FinOps Security Gates + Quick Module Navigation */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 {/* Left: 4 FinOps Security Gates (Zero-Trust Pipeline) */}
-                <div className="lg:col-span-7 p-6 rounded-3xl glass-card glass-card-interactive flex flex-col justify-between border-purple-500/15">
+                <div className="lg:col-span-7 p-6 rounded-3xl glass-card glass-card-interactive flex flex-col justify-between border-purple-500/25">
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
@@ -149,59 +149,59 @@ export default function Home() {
                           Autonomous Security Pipeline
                         </h4>
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm">
+                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm">
                         Zero-Trust Air Gap
                       </span>
                     </div>
 
                     <div className="space-y-2.5">
-                      <div className="p-3.5 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
+                      <div className="p-3.5 rounded-2xl bg-surface-canvas/70 border border-purple-500/20 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
                         <div className="flex items-center gap-3">
-                          <span className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/25 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
+                          <span className="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
                             1
                           </span>
                           <div>
                             <p className="text-xs font-semibold text-white">Cryptographic Proof-of-Intent</p>
-                            <p className="text-[11px] text-purple-300/50">SHA-256 deterministic intent hashing before payout</p>
+                            <p className="text-[11px] text-purple-200/70">SHA-256 deterministic intent hashing before payout</p>
                           </div>
                         </div>
                         <span className="text-[10px] font-mono text-emerald-400 font-bold">VERIFIED</span>
                       </div>
 
-                      <div className="p-3.5 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
+                      <div className="p-3.5 rounded-2xl bg-surface-canvas/70 border border-purple-500/20 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
                         <div className="flex items-center gap-3">
-                          <span className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/25 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
+                          <span className="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
                             2
                           </span>
                           <div>
                             <p className="text-xs font-semibold text-white">Cosine Semantic Drift Engine</p>
-                            <p className="text-[11px] text-purple-300/50">Adversarial prompt injection &amp; jailbreak quarantine (&lt;18ms)</p>
+                            <p className="text-[11px] text-purple-200/70">Adversarial prompt injection &amp; jailbreak quarantine (&lt;18ms)</p>
                           </div>
                         </div>
                         <span className="text-[10px] font-mono text-emerald-400 font-bold">ARMED</span>
                       </div>
 
-                      <div className="p-3.5 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
+                      <div className="p-3.5 rounded-2xl bg-surface-canvas/70 border border-purple-500/20 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
                         <div className="flex items-center gap-3">
-                          <span className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/25 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
+                          <span className="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
                             3
                           </span>
                           <div>
                             <p className="text-xs font-semibold text-white">Sliding-Window Velocity Breaker</p>
-                            <p className="text-[11px] text-purple-300/50">Autonomous runaway loop trip switch ($100/min cap)</p>
+                            <p className="text-[11px] text-purple-200/70">Autonomous runaway loop trip switch ($100/min cap)</p>
                           </div>
                         </div>
                         <span className="text-[10px] font-mono text-emerald-400 font-bold">MONITORED</span>
                       </div>
 
-                      <div className="p-3.5 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
+                      <div className="p-3.5 rounded-2xl bg-surface-canvas/70 border border-purple-500/20 flex items-center justify-between hover:bg-surface-card-hover transition-colors">
                         <div className="flex items-center gap-3">
-                          <span className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/25 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
+                          <span className="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-200 flex items-center justify-center text-xs font-mono font-bold shadow-sm">
                             4
                           </span>
                           <div>
                             <p className="text-xs font-semibold text-white">PayPal Developer Platform</p>
-                            <p className="text-[11px] text-purple-300/50">Payouts v1 &amp; Orders v2 micro-disbursements</p>
+                            <p className="text-[11px] text-purple-200/70">Payouts v1 &amp; Orders v2 micro-disbursements</p>
                           </div>
                         </div>
                         <span className="text-[10px] font-mono text-emerald-400 font-bold">ONLINE</span>
@@ -211,72 +211,72 @@ export default function Home() {
                 </div>
 
                 {/* Right: Quick Module Switcher */}
-                <div className="lg:col-span-5 p-6 rounded-3xl glass-card glass-card-interactive flex flex-col justify-between border-purple-500/15">
+                <div className="lg:col-span-5 p-6 rounded-3xl glass-card glass-card-interactive flex flex-col justify-between border-purple-500/25">
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-xs font-bold text-white uppercase tracking-wider">
                         Module Navigation
                       </h4>
-                      <span className="text-[10px] font-mono text-purple-300/50">1-Click Jump</span>
+                      <span className="text-[10px] font-mono text-purple-200/80">1-Click Jump</span>
                     </div>
 
                     <div className="space-y-3">
                       <button
                         onClick={() => setActiveTab("ledger")}
-                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/40 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
+                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/70 hover:bg-surface-card-hover border border-purple-500/20 hover:border-purple-500/50 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300 group-hover:text-white group-hover:bg-brand-violet transition-colors">
+                          <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-200 group-hover:text-white group-hover:bg-brand-violet transition-colors">
                             <FileSpreadsheet className="w-4 h-4" />
                           </div>
                           <div>
                             <p className="text-xs font-bold text-white group-hover:text-purple-200 transition-colors">
                               Audit Ledger (AG Grid)
                             </p>
-                            <p className="text-[11px] text-purple-300/50">Immutable telemetry &amp; CSV export</p>
+                            <p className="text-[11px] text-purple-200/70">Immutable telemetry &amp; CSV export</p>
                           </div>
                         </div>
-                        <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        <span className="text-xs font-mono text-purple-200/80 group-hover:translate-x-1 transition-transform">
                           &rarr;
                         </span>
                       </button>
 
                       <button
                         onClick={() => setActiveTab("scenarios")}
-                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/40 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
+                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/70 hover:bg-surface-card-hover border border-purple-500/20 hover:border-purple-500/50 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300 group-hover:text-white group-hover:bg-brand-violet transition-colors">
+                          <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-200 group-hover:text-white group-hover:bg-brand-violet transition-colors">
                             <Play className="w-4 h-4" />
                           </div>
                           <div>
                             <p className="text-xs font-bold text-white group-hover:text-purple-200 transition-colors">
                               Evaluator Scenarios
                             </p>
-                            <p className="text-[11px] text-purple-300/50">4 live attack vector simulations</p>
+                            <p className="text-[11px] text-purple-200/70">4 live attack vector simulations</p>
                           </div>
                         </div>
-                        <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        <span className="text-xs font-mono text-purple-200/80 group-hover:translate-x-1 transition-transform">
                           &rarr;
                         </span>
                       </button>
 
                       <button
                         onClick={() => setActiveTab("paypal")}
-                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/40 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
+                        className="w-full p-3.5 rounded-2xl bg-surface-canvas/70 hover:bg-surface-card-hover border border-purple-500/20 hover:border-purple-500/50 text-left transition-all flex items-center justify-between group shadow-sm hover:translate-x-1"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-[#003087]/20 border border-[#0070BA]/30 flex items-center justify-center text-cyan-300 group-hover:bg-[#0070BA]/40 transition-colors">
+                          <div className="w-9 h-9 rounded-xl bg-[#003087]/30 border border-[#0070BA]/40 flex items-center justify-center text-cyan-300 group-hover:bg-[#0070BA]/50 transition-colors">
                             <span className="text-xs font-black italic font-mono">P</span>
                           </div>
                           <div>
                             <p className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
                               PayPal Sandbox Console
                             </p>
-                            <p className="text-[11px] text-purple-300/50">Live REST endpoints &amp; webhooks</p>
+                            <p className="text-[11px] text-purple-200/70">Live REST endpoints &amp; webhooks</p>
                           </div>
                         </div>
-                        <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        <span className="text-xs font-mono text-purple-200/80 group-hover:translate-x-1 transition-transform">
                           &rarr;
                         </span>
                       </button>
@@ -320,7 +320,7 @@ export default function Home() {
         />
 
         {/* Minimalist Footer */}
-        <footer className="border-t border-surface-border/30 bg-surface-canvas/50 py-4 px-6 text-center text-[11px] text-purple-300/40 mt-auto">
+        <footer className="border-t border-surface-border/40 bg-surface-canvas/60 py-4 px-6 text-center text-[11px] text-purple-300/60 mt-auto">
           <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 font-mono">
             <span>AgentShield Sovereign FinOps Gateway &copy; 2026. MIT License.</span>
             <span>Engineered for PayPal AI Hackathon 2026 (Agentic Commerce &amp; AG Grid Tracks)</span>
