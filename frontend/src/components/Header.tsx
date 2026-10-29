@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Shield, ShieldAlert, RefreshCw, Zap, ExternalLink } from "lucide-react";
+import { Shield, ShieldAlert, RefreshCw, Zap, Bell } from "lucide-react";
 
 interface HeaderProps {
   systemStatus: string;
@@ -9,6 +9,8 @@ interface HeaderProps {
   onToggleKillSwitch: () => void;
   onResetSystem: () => void;
   isLoading: boolean;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 }
 
 export default function Header({
@@ -17,92 +19,93 @@ export default function Header({
   onToggleKillSwitch,
   onResetSystem,
   isLoading,
+  activeTab,
+  setActiveTab,
 }: HeaderProps) {
+  const tabs = [
+    { id: "overview", label: "Overview" },
+    { id: "ledger", label: "Audit Ledger" },
+    { id: "scenarios", label: "Scenarios" },
+    { id: "paypal", label: "PayPal Sandbox" },
+  ];
+
   return (
-    <header className="border-b border-surface-border bg-surface/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Brand & Identity */}
+    <header className="px-6 py-4 border-b border-surface-border/40 bg-background/90 backdrop-blur-md sticky top-0 z-40">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
+        {/* Brand Logo */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-accent/40 shadow-lg shadow-cyan-500/10">
-            <Shield className="w-5 h-5 text-accent" />
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isKillSwitchActive ? "bg-danger" : "bg-success"}`} />
-              <span className={`relative inline-flex rounded-full h-3 w-3 ${isKillSwitchActive ? "bg-danger" : "bg-success"}`} />
-            </span>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-fuchsia flex items-center justify-center shadow-lg shadow-purple-500/25">
+            <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                AgentShield
-              </h1>
-              <span className="text-[10px] font-mono tracking-widest uppercase px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/30">
-                v1.3 Enterprise
+              <span className="text-lg font-bold tracking-tight text-white">AgentShield</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/20">
+                FinOps Firewall
               </span>
             </div>
-            <p className="text-xs text-slate-400">
-              Autonomous FinOps & Cryptographic Spending Firewall for AI Agents
-            </p>
           </div>
         </div>
 
-        {/* Sponsor Badges & Live Status */}
-        <div className="flex items-center flex-wrap gap-2.5">
+        {/* Center Pill Navigation for AgentShield */}
+        <nav className="hidden md:flex items-center p-1 rounded-full bg-surface-card border border-surface-border/60 backdrop-blur-lg">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-brand-violet text-white shadow-md shadow-purple-600/30 font-semibold"
+                    : "text-purple-200/60 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Right Status & Controls */}
+        <div className="flex items-center gap-2.5">
           {/* PayPal Sandbox Status Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#003087]/20 border border-[#0070BA]/40 text-xs font-mono text-cyan-300">
-            <span className="w-2 h-2 rounded-full bg-[#0070BA] animate-pulse" />
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/20 text-[11px] font-mono text-purple-200">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>PayPal Sandbox Live</span>
-            <span className="text-slate-500">|</span>
-            <span className="text-[11px] text-slate-300 font-sans">Orders v2 & Payouts v1</span>
           </div>
 
-          {/* AG Grid Enterprise Indicator */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-card border border-surface-border text-xs font-mono text-slate-300">
-            <Zap className="w-3.5 h-3.5 text-yellow-400" />
-            <span>AG Grid Enterprise</span>
-          </div>
-
-          {/* System Health Status */}
-          <div
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+          {/* Kill Switch Toggle Button */}
+          <button
+            onClick={onToggleKillSwitch}
+            disabled={isLoading}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${
               isKillSwitchActive
-                ? "bg-danger/10 border-danger/40 text-danger glow-red"
-                : "bg-success/10 border-success/40 text-success glow-green"
+                ? "bg-danger/20 border-danger/50 text-danger shadow-md shadow-danger/20"
+                : "bg-surface-card hover:bg-surface-card-hover border-surface-border text-slate-300"
             }`}
           >
             {isKillSwitchActive ? (
               <>
-                <ShieldAlert className="w-4 h-4 animate-bounce" />
-                <span>KILL-SWITCH ACTIVE</span>
+                <ShieldAlert className="w-3.5 h-3.5 text-danger animate-bounce" />
+                <span>Kill-Switch: ACTIVE</span>
               </>
             ) : (
               <>
-                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span>SYSTEM OPERATIONAL</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span>System Operational</span>
               </>
             )}
-          </div>
-
-          {/* Emergency Kill-Switch Button */}
-          <button
-            onClick={onToggleKillSwitch}
-            disabled={isLoading}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-md flex items-center gap-1.5 ${
-              isKillSwitchActive
-                ? "bg-success/20 hover:bg-success/30 text-success border border-success/50"
-                : "bg-danger/20 hover:bg-danger/30 text-danger border border-danger/50"
-            }`}
-          >
-            {isKillSwitchActive ? "Deactivate Kill-Switch" : "Engage Kill-Switch"}
           </button>
 
-          {/* Reset System */}
+          {/* Reset System Button */}
           <button
             onClick={onResetSystem}
             disabled={isLoading}
-            title="Reset Ledger & History"
-            className="p-1.5 rounded-lg bg-surface-card hover:bg-surface-border border border-surface-border text-slate-400 hover:text-white transition-colors"
+            title="Reset Telemetry Data"
+            className="w-8 h-8 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border flex items-center justify-center text-purple-300 hover:text-white transition-colors"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
           </button>
         </div>
       </div>

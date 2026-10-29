@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, ShieldCheck, ShieldAlert, Copy, ExternalLink, Hash, Clock, DollarSign, UserCheck } from "lucide-react";
+import { X, ShieldCheck, ShieldAlert, Copy, Hash, Shield, DollarSign, Clock, ArrowRight } from "lucide-react";
 import { LedgerRecord } from "@/types";
 
 interface InspectorDrawerProps {
@@ -18,118 +18,133 @@ export default function InspectorDrawer({ record, onClose }: InspectorDrawerProp
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end animate-fadeIn">
-      <div className="w-full max-w-lg bg-surface border-l border-surface-border h-full p-6 overflow-y-auto shadow-2xl flex flex-col justify-between">
-        <div className="space-y-6">
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-surface-border pb-4">
-            <div className="flex items-center gap-2.5">
-              <div className={`p-2 rounded-xl border ${isApproved ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" : "bg-danger/10 border-danger/30 text-danger"}`}>
-                {isApproved ? <ShieldCheck className="w-5 h-5" /> : <ShieldAlert className="w-5 h-5" />}
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-white">Cryptographic Forensics Audit</h3>
-                <p className="text-xs text-slate-400 font-mono">Record ID: {record.id}</p>
-              </div>
-            </div>
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-lg bg-surface-card hover:bg-surface-border text-slate-400 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Status & Risk Summary */}
-          <div className="p-4 rounded-xl bg-surface-card border border-surface-border space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold">Firewall Verdict</span>
-              <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${
+    <div className="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+      {/* Centered Glassmorphic Modal (Matching Image 2 Reference) */}
+      <div className="w-full max-w-xl rounded-3xl glass-card border border-purple-500/25 p-7 shadow-2xl shadow-purple-950/60 relative overflow-hidden flex flex-col gap-6">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-purple-500/10 pb-4">
+          <div className="flex items-center gap-3">
+            <div
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg ${
                 isApproved
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                  : "bg-danger/10 text-danger border-danger/30"
-              }`}>
-                {record.status}
+                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                  : "bg-danger/20 text-danger border border-danger/30"
+              }`}
+            >
+              {isApproved ? <ShieldCheck className="w-5 h-5" /> : <ShieldAlert className="w-5 h-5" />}
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-white tracking-tight">
+                Cryptographic Forensic Audit
+              </h3>
+              <span className="text-[11px] font-mono text-purple-300/50">
+                Transaction ID: {record.id}
               </span>
-            </div>
-
-            <div className="text-xs text-slate-300 leading-relaxed font-mono bg-surface p-3 rounded-lg border border-surface-border">
-              {record.decision_reason}
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="p-2.5 rounded-lg bg-surface border border-surface-border">
-                <span className="text-[10px] uppercase text-slate-500 block">Risk Anomaly Score</span>
-                <span className="text-lg font-bold font-mono text-white">{record.risk_score}%</span>
-              </div>
-              <div className="p-2.5 rounded-lg bg-surface border border-surface-border">
-                <span className="text-[10px] uppercase text-slate-500 block">Evaluation Latency</span>
-                <span className="text-lg font-bold font-mono text-cyan-400">{record.latency_ms} ms</span>
-              </div>
             </div>
           </div>
 
-          {/* SHA-256 Intent Hash Anchor */}
-          <div className="p-4 rounded-xl bg-surface-card border border-surface-border space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Hash className="w-3.5 h-3.5 text-accent" />
-                <span>SHA-256 Intent Hash (PoI)</span>
-              </span>
-              <button
-                onClick={() => copyToClipboard(record.intent_hash)}
-                className="text-[11px] text-accent hover:underline flex items-center gap-1 font-mono"
-              >
-                <Copy className="w-3 h-3" />
-                <span>Copy</span>
-              </button>
-            </div>
-            <p className="text-xs font-mono text-slate-300 break-all bg-surface p-2.5 rounded-lg border border-surface-border">
-              {record.intent_hash}
-            </p>
-            <p className="text-[11px] text-slate-500">
-              Deterministic task anchor verified prior to any external tool actuation.
-            </p>
-          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border flex items-center justify-center text-purple-300 hover:text-white transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
 
-          {/* PayPal Settlement Details */}
-          <div className="p-4 rounded-xl bg-surface-card border border-surface-border space-y-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-              <DollarSign className="w-3.5 h-3.5 text-cyan-400" />
-              <span>PayPal Settlement Pipeline</span>
+        {/* Rule Builder / Trigger Pipeline View (Matching Image 2) */}
+        <div className="grid grid-cols-3 gap-3">
+          {/* Box 1: Agent & Intent */}
+          <div className="p-3.5 rounded-2xl bg-surface-canvas border border-purple-500/15">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-purple-300/50 block mb-1">
+              REQUESTING AGENT
             </span>
+            <span className="text-xs font-mono font-bold text-white truncate block">
+              {record.agent_id}
+            </span>
+            <span className="text-[10px] text-purple-300/40 mt-1 block">
+              {record.category}
+            </span>
+          </div>
 
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between py-1 border-b border-surface-border/60">
-                <span className="text-slate-400">Target Recipient</span>
-                <span className="font-mono text-slate-200">{record.recipient}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-surface-border/60">
-                <span className="text-slate-400">Authorized USD</span>
-                <span className="font-mono font-bold text-emerald-400">${record.amount.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-surface-border/60">
-                <span className="text-slate-400">PayPal Batch ID</span>
-                <span className="font-mono text-cyan-300">
-                  {record.paypal_batch_id || "None (Severed by Firewall)"}
-                </span>
-              </div>
-              <div className="flex justify-between py-1">
-                <span className="text-slate-400">Execution Mode</span>
-                <span className="font-mono text-slate-300">PayPal Sandbox REST API v1/v2</span>
-              </div>
-            </div>
+          {/* Box 2: Amount & Verdict */}
+          <div className="p-3.5 rounded-2xl bg-surface-canvas border border-purple-500/15">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-purple-300/50 block mb-1">
+              AUTHORIZED USD
+            </span>
+            <span className="text-sm font-mono font-bold text-emerald-400 block">
+              ${record.amount.toFixed(2)}
+            </span>
+            <span className="text-[10px] font-semibold text-purple-300/70 mt-1 block">
+              {record.status}
+            </span>
+          </div>
+
+          {/* Box 3: Recipient & Pipeline */}
+          <div className="p-3.5 rounded-2xl bg-surface-canvas border border-purple-500/15">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-purple-300/50 block mb-1">
+              SETTLEMENT ROUTE
+            </span>
+            <span className="text-xs font-mono text-white truncate block">
+              {record.recipient}
+            </span>
+            <span className="text-[10px] font-mono text-brand-purple mt-1 block">
+              PayPal Sandbox
+            </span>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="pt-4 border-t border-surface-border flex justify-end">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-surface-card hover:bg-surface-border border border-surface-border text-xs text-white font-medium transition-colors"
-          >
-            Close Audit Inspector
-          </button>
+        {/* Decision Reasoning Box */}
+        <div className="p-4 rounded-2xl bg-surface-canvas border border-purple-500/15 space-y-2">
+          <div className="flex items-center justify-between text-xs text-purple-300/60 font-semibold">
+            <span>Security Engine Evaluation</span>
+            <span className="font-mono text-cyan-400 text-[11px]">{record.latency_ms} ms</span>
+          </div>
+          <p className="text-xs text-purple-200/90 leading-relaxed font-mono">
+            {record.decision_reason}
+          </p>
+        </div>
+
+        {/* SHA-256 Intent Hash Anchor */}
+        <div className="p-4 rounded-2xl bg-surface-canvas border border-purple-500/15 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-purple-300/70 flex items-center gap-1.5">
+              <Hash className="w-3.5 h-3.5 text-brand-purple" />
+              <span>Cryptographic Proof-of-Intent (SHA-256)</span>
+            </span>
+            <button
+              onClick={() => copyToClipboard(record.intent_hash)}
+              className="text-[11px] text-brand-purple hover:underline flex items-center gap-1 font-mono"
+            >
+              <Copy className="w-3 h-3" />
+              <span>Copy</span>
+            </button>
+          </div>
+          <p className="text-xs font-mono text-purple-300/90 break-all bg-surface-card p-2.5 rounded-xl border border-surface-border">
+            {record.intent_hash}
+          </p>
+        </div>
+
+        {/* Footer (Matching Image 2 Footer Buttons) */}
+        <div className="pt-2 flex items-center justify-between border-t border-purple-500/10">
+          <div className="flex items-center gap-2 text-xs text-purple-300/60">
+            <Shield className="w-4 h-4 text-brand-purple" />
+            <span>Deterministic Zero-Trust Air-Gap</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border text-xs text-purple-200 font-medium transition-colors"
+            >
+              Dismiss
+            </button>
+            <button
+              onClick={() => copyToClipboard(record.intent_hash)}
+              className="px-4 py-2 rounded-full bg-brand-violet hover:bg-purple-600 text-xs text-white font-semibold transition-all shadow-md shadow-purple-600/30"
+            >
+              Copy Audit Proof
+            </button>
+          </div>
         </div>
       </div>
     </div>
