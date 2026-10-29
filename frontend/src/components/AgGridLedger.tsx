@@ -10,6 +10,8 @@ import { LedgerRecord } from "@/types";
 interface AgGridLedgerProps {
   records: LedgerRecord[];
   onSelectRecord: (record: LedgerRecord) => void;
+  heightClass?: string;
+  pageSize?: number;
 }
 
 // Custom Status Badge
@@ -91,7 +93,12 @@ const AmountRenderer = (params: any) => {
   );
 };
 
-export default function AgGridLedger({ records, onSelectRecord }: AgGridLedgerProps) {
+export default function AgGridLedger({
+  records,
+  onSelectRecord,
+  heightClass = "h-[400px]",
+  pageSize = 8,
+}: AgGridLedgerProps) {
   const gridRef = useRef<AgGridReact>(null);
   const [quickFilterText, setQuickFilterText] = useState("");
 
@@ -235,7 +242,7 @@ export default function AgGridLedger({ records, onSelectRecord }: AgGridLedgerPr
       </div>
 
       {/* The AG Grid Enterprise View */}
-      <div className="ag-theme-quartz-dark w-full h-[400px] shadow-2xl">
+      <div className={`ag-theme-quartz-dark w-full ${heightClass} shadow-2xl`}>
         <AgGridReact<LedgerRecord>
           ref={gridRef}
           rowData={records}
@@ -243,8 +250,8 @@ export default function AgGridLedger({ records, onSelectRecord }: AgGridLedgerPr
           defaultColDef={defaultColDef}
           quickFilterText={quickFilterText}
           pagination={true}
-          paginationPageSize={8}
-          paginationPageSizeSelector={[8, 16, 32]}
+          paginationPageSize={pageSize}
+          paginationPageSizeSelector={[8, 12, 16, 32]}
           animateRows={true}
           rowSelection="single"
           onRowClicked={onRowClicked}
