@@ -97,19 +97,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-slate-100 selection:bg-brand-violet selection:text-white relative overflow-hidden">
-      {/* 3D Radiant Ambient Glowing Mesh (Luminous Violet & Fuchsia Atmosphere) */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div
-          className="absolute -top-32 left-1/4 w-[750px] h-[750px] bg-purple-600/25 rounded-full blur-[140px] animate-pulse"
-          style={{ animationDuration: "8s" }}
-        />
-        <div
-          className="absolute top-1/4 -right-10 w-[650px] h-[650px] bg-fuchsia-600/20 rounded-full blur-[150px] animate-pulse"
-          style={{ animationDuration: "10s" }}
-        />
-        <div className="absolute -bottom-10 left-1/3 w-[700px] h-[700px] bg-violet-600/22 rounded-full blur-[160px]" />
-      </div>
-
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* 1. Top Pill Navigation Bar (Matching Nivo styling, AgentShield motive) */}
         <Header

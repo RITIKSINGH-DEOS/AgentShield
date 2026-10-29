@@ -40,7 +40,7 @@ export default function HeroOverview({
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-brand-violet animate-pulse shadow-sm shadow-purple-400" />
+              <span className="w-2 h-2 rounded-full bg-brand-violet animate-pulse " />
               <span className="text-[11px] text-purple-200/90 font-mono">PayPal Live Stream</span>
             </div>
           </div>

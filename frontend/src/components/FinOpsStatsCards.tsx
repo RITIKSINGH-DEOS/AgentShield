@@ -38,9 +38,9 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
               stroke="#c084fc"
               strokeWidth="2.5"
               strokeLinecap="round"
-              style={{ filter: "drop-shadow(0 0 4px rgba(192, 132, 252, 0.5))" }}
+              
             />
-            <circle r="3.2" fill="#34d399" style={{ filter: "drop-shadow(0 0 6px #10b981)" }}>
+            <circle r="3.2" fill="#34d399" >
               <animateMotion
                 path="M 0 18 Q 25 4, 50 16 T 100 8"
                 dur="7.2s"
@@ -80,9 +80,9 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
               stroke="#f43f5e"
               strokeWidth="2.5"
               strokeLinecap="round"
-              style={{ filter: "drop-shadow(0 0 4px rgba(244, 63, 94, 0.6))" }}
+              
             />
-            <circle r="3.2" fill="#ff3366" style={{ filter: "drop-shadow(0 0 6px #ff3366)" }}>
+            <circle r="3.2" fill="#ff3366" >
               <animateMotion
                 path="M 0 14 Q 25 22, 50 6 T 100 12"
                 dur="6.5s"
@@ -122,9 +122,9 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
               stroke="#a855f7"
               strokeWidth="2.5"
               strokeLinecap="round"
-              style={{ filter: "drop-shadow(0 0 4px rgba(168, 85, 247, 0.6))" }}
+              
             />
-            <circle r="3.2" fill="#e9d5ff" style={{ filter: "drop-shadow(0 0 6px #c084fc)" }}>
+            <circle r="3.2" fill="#e9d5ff" >
               <animateMotion
                 path="M 0 18 Q 30 6, 60 18 T 100 10"
                 dur="8.0s"
@@ -174,16 +174,12 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
               stroke={stats.circuit_breaker_active ? "#ff3366" : "#34d399"}
               strokeWidth="2.5"
               strokeLinecap="round"
-              style={{
-                filter: `drop-shadow(0 0 4px ${stats.circuit_breaker_active ? "#ff3366" : "#34d399"})`,
-              }}
+
             />
             <circle
               r="3.2"
               fill={stats.circuit_breaker_active ? "#ff3366" : "#34d399"}
-              style={{
-                filter: `drop-shadow(0 0 6px ${stats.circuit_breaker_active ? "#ff3366" : "#10b981"})`,
-              }}
+
             >
               <animateMotion
                 path="M 0 16 Q 25 22, 55 8 T 100 6"
