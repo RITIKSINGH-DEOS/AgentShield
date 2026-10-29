@@ -25,7 +25,7 @@ export default function HeroOverview({
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-      {/* 1. Left Card: Total Agentic Spend & Telemetry Stream (Span 8) */}
+      {/* 1. Left Card: Total Agentic Spend & Animated Telemetry Stream (Span 8) */}
       <div className="lg:col-span-8 p-6 rounded-3xl glass-card glass-card-interactive relative overflow-hidden flex flex-col justify-between">
         <div>
           {/* Header */}
@@ -60,25 +60,25 @@ export default function HeroOverview({
             Programmatic micro-disbursements mediated via PayPal Orders v2 &amp; Payouts v1 under cryptographic PoI verification.
           </p>
 
-          {/* Dot Matrix Agent Activity Stream */}
+          {/* Dot Matrix Agent Activity Stream with Constant Pattern Wave Motion */}
           <div className="py-2">
             <div className="grid grid-flow-col gap-1.5 h-20 items-center justify-between">
               {Array.from({ length: matrixCols }).map((_, colIdx) => (
                 <div key={colIdx} className="flex flex-col gap-1.5 justify-center">
                   {Array.from({ length: matrixRows }).map((_, rowIdx) => {
-                    const isFuchsia = (colIdx * 3 + rowIdx * 7) % 5 === 0;
-                    const isPurple = (colIdx * 2 + rowIdx * 3) % 3 === 0;
-                    const isActive = isFuchsia || isPurple;
-                    const opacity = isActive
-                      ? isFuchsia
-                        ? "bg-fuchsia-400 shadow-sm shadow-fuchsia-400/70"
-                        : "bg-purple-400 shadow-sm shadow-purple-400/60"
-                      : "bg-purple-900/50";
+                    // Constant cascading wave pattern flowing from Left to Right
+                    const cycleDuration = 3.6;
+                    const colProgress = (colIdx / matrixCols) * cycleDuration;
+                    const waveOffset = Math.sin(colIdx * 0.45 + rowIdx * 0.75) * 0.45;
+                    const delay = (colProgress + waveOffset + cycleDuration) % cycleDuration;
 
                     return (
                       <div
                         key={rowIdx}
-                        className={`w-2 h-2 rounded-[2.5px] transition-all duration-300 ${opacity}`}
+                        className="w-2 h-2 rounded-[2.5px] animate-matrix-dot"
+                        style={{
+                          animationDelay: `-${delay.toFixed(2)}s`,
+                        }}
                       />
                     );
                   })}
