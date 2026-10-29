@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+
+:root {
+  --background: #090a0f;
+  --foreground: #f0f2f8;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom AG Grid Dark Overrides */
+.ag-theme-quartz-dark {
+  --ag-background-color: #11131b;
+  --ag-header-background-color: #161924;
+  --ag-header-foreground-color: #94a3b8;
+  --ag-border-color: #1e2230;
+  --ag-row-hover-color: rgba(0, 230, 255, 0.05);
+  --ag-selected-row-background-color: rgba(0, 230, 255, 0.1);
+  --ag-odd-row-background-color: #11131b;
+  --ag-font-family: inherit;
+  --ag-font-size: 13px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e2230;
+}
+
+.ag-theme-quartz-dark .ag-header-cell {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2230;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3045;
+}
+
+/* Subtle glow effects */
+.glow-cyan {
+  box-shadow: 0 0 25px rgba(0, 230, 255, 0.15);
+}
+
+.glow-red {
+  box-shadow: 0 0 25px rgba(255, 51, 102, 0.25);
+}
+
+.glow-green {
+  box-shadow: 0 0 25px rgba(0, 229, 153, 0.2);
+}
