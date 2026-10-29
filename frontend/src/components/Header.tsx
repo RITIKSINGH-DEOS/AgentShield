@@ -30,17 +30,19 @@ export default function Header({
   ];
 
   return (
-    <header className="px-6 py-4 border-b border-surface-border/40 bg-background/90 backdrop-blur-md sticky top-0 z-40">
+    <header className="px-6 py-4 border-b border-surface-border/40 bg-background/80 backdrop-blur-2xl sticky top-0 z-40 shadow-lg shadow-black/30">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-fuchsia flex items-center justify-center shadow-lg shadow-purple-500/25">
+        {/* Brand Logo with 3D Specular Glow */}
+        <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setActiveTab("overview")}>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-fuchsia flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform duration-300">
             <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold tracking-tight text-white">AgentShield</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/20">
+              <span className="text-lg font-bold tracking-tight text-white group-hover:text-purple-200 transition-colors">
+                AgentShield
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/25 shadow-sm">
                 FinOps Firewall
               </span>
             </div>
@@ -48,17 +50,17 @@ export default function Header({
         </div>
 
         {/* Center Pill Navigation for AgentShield */}
-        <nav className="hidden md:flex items-center p-1 rounded-full bg-surface-card border border-surface-border/60 backdrop-blur-lg">
+        <nav className="hidden md:flex items-center p-1 rounded-full bg-surface-card/90 border border-surface-border/80 backdrop-blur-2xl shadow-inner shadow-black/40">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-brand-violet text-white shadow-md shadow-purple-600/30 font-semibold"
-                    : "text-purple-200/60 hover:text-white hover:bg-white/5"
+                    ? "bg-brand-violet text-white shadow-lg shadow-purple-600/40 font-semibold scale-100"
+                    : "text-purple-200/60 hover:text-white hover:bg-white/5 hover:scale-105"
                 }`}
               >
                 {tab.label}
@@ -70,7 +72,7 @@ export default function Header({
         {/* Right Status & Controls */}
         <div className="flex items-center gap-2.5">
           {/* PayPal Sandbox Status Badge */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/20 text-[11px] font-mono text-purple-200">
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/20 text-[11px] font-mono text-purple-200 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>PayPal Sandbox Live</span>
           </div>
@@ -79,10 +81,10 @@ export default function Header({
           <button
             onClick={onToggleKillSwitch}
             disabled={isLoading}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all interactive-pill ${
               isKillSwitchActive
-                ? "bg-danger/20 border-danger/50 text-danger shadow-md shadow-danger/20"
-                : "bg-surface-card hover:bg-surface-card-hover border-surface-border text-slate-300"
+                ? "bg-danger/20 border-danger/50 text-danger shadow-lg shadow-danger/25"
+                : "bg-surface-card hover:bg-surface-card-hover border-surface-border text-slate-300 hover:text-white"
             }`}
           >
             {isKillSwitchActive ? (
@@ -92,20 +94,10 @@ export default function Header({
               </>
             ) : (
               <>
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50" />
                 <span>System Operational</span>
               </>
             )}
-          </button>
-
-          {/* Reset System Button */}
-          <button
-            onClick={onResetSystem}
-            disabled={isLoading}
-            title="Reset Telemetry Data"
-            className="w-8 h-8 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border flex items-center justify-center text-purple-300 hover:text-white transition-colors"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
           </button>
         </div>
       </div>

@@ -6,7 +6,7 @@
 @import "ag-grid-community/styles/ag-theme-quartz.css";
 
 :root {
-  --background: #0c0919;
+  --background: #090615;
   --foreground: #f3f4f8;
 }
 
@@ -18,21 +18,96 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Luxury Glassmorphism Card */
+/* ==========================================================================
+   ULTRA-LUXURY 3D GLASSMORPHISM & SPECULAR LIGHTING
+   ========================================================================== */
+
+/* 1. Ambient 3D Glass Surface */
 .glass-card {
-  background: linear-gradient(135deg, rgba(23, 19, 44, 0.85) 0%, rgba(20, 16, 38, 0.7) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(28, 22, 54, 0.75) 0%,
+    rgba(16, 12, 34, 0.65) 100%
+  );
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4),
+    0 16px 36px -12px rgba(0, 0, 0, 0.65),
+    0 4px 12px -2px rgba(10, 7, 22, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
 }
 
-.glass-card-hover:hover {
-  border-color: rgba(168, 85, 247, 0.3);
-  box-shadow: 0 12px 35px -5px rgba(139, 92, 246, 0.2);
+/* 2. Specular Top Rim Reflection (Creates realistic physical glass edge) */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 40%,
+    rgba(216, 180, 254, 0.4) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.35s ease, background 0.35s ease;
+  border-radius: 9999px;
 }
 
-/* Custom AG Grid Luxury Purple Quartz Overrides */
+/* 3. 3D Cursor Hover Elevation & Amethyst Aura */
+.glass-card-interactive {
+  cursor: pointer;
+}
+
+.glass-card-interactive:hover {
+  transform: translateY(-4px) scale(1.006);
+  background: linear-gradient(
+    135deg,
+    rgba(36, 27, 72, 0.85) 0%,
+    rgba(22, 16, 44, 0.78) 100%
+  );
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5),
+    0 24px 55px -10px rgba(0, 0, 0, 0.8),
+    0 0 35px -5px rgba(168, 85, 247, 0.28);
+}
+
+.glass-card-interactive:hover::after {
+  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 30%,
+    rgba(216, 180, 254, 0.8) 70%,
+    transparent 100%
+  );
+}
+
+/* 4. Luxury Pill Buttons */
+.interactive-pill {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.interactive-pill:hover {
+  transform: translateY(-1.5px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(139, 92, 246, 0.35);
+}
+
+/* ==========================================================================
+   CUSTOM AG GRID LUXURY PURPLE QUARTZ OVERRIDES
+   ========================================================================== */
 .ag-theme-quartz-dark {
   --ag-background-color: #120e24;
   --ag-header-background-color: #181330;
@@ -46,9 +121,12 @@ body {
   --ag-row-height: 52px;
   --ag-header-height: 46px;
   --ag-cell-horizontal-padding: 14px;
-  border-radius: 20px;
+  border-radius: 24px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
+    0 20px 45px -15px rgba(0, 0, 0, 0.7);
 }
 
 .ag-theme-quartz-dark .ag-header-cell {
@@ -67,12 +145,12 @@ body {
 .ag-theme-quartz-dark .ag-cell {
   display: flex !important;
   align-items: center !important;
-  border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.08);
   line-height: normal;
 }
 
 .ag-theme-quartz-dark .ag-row {
-  border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.08);
   transition: background-color 0.15s ease;
 }
 
@@ -82,7 +160,7 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0919;
+  background: #090615;
 }
 ::-webkit-scrollbar-thumb {
   background: #282046;
@@ -94,9 +172,9 @@ body {
 
 /* Glowing Elements */
 .glow-purple {
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.35);
 }
 
 .glow-pill {
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
 }
