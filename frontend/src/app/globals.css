@@ -252,3 +252,22 @@ body {
 .glow-pill {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
+/* ==========================================================================
+   SMOOTH TAB CONTENT TRANSITION (NO HARSH JUMPS)
+   ========================================================================== */
+@keyframes tabContentEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content-enter {
+  animation: tabContentEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}

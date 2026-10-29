@@ -29,6 +29,26 @@ export default function Header({
     { id: "paypal", label: "PayPal Sandbox" },
   ];
 
+  const tabRefs = React.useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const [indicatorStyle, setIndicatorStyle] = React.useState({ left: 0, width: 0, opacity: 0 });
+
+  React.useEffect(() => {
+    const updateIndicator = () => {
+      const currentBtn = tabRefs.current[activeTab];
+      if (currentBtn) {
+        setIndicatorStyle({
+          left: currentBtn.offsetLeft,
+          width: currentBtn.offsetWidth,
+          opacity: 1,
+        });
+      }
+    };
+
+    updateIndicator();
+    window.addEventListener("resize", updateIndicator);
+    return () => window.removeEventListener("resize", updateIndicator);
+  }, [activeTab]);
+
   return (
     <header className="px-6 py-4 border-b border-purple-500/25 bg-background/85 backdrop-blur-2xl sticky top-0 z-40 shadow-lg shadow-black/20">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
@@ -49,18 +69,30 @@ export default function Header({
           </div>
         </div>
 
-        {/* Center Pill Navigation for AgentShield */}
-        <nav className="hidden md:flex items-center p-1 rounded-full bg-surface-card/90 border border-purple-500/30 backdrop-blur-2xl shadow-inner shadow-black/30">
+        {/* Center Pill Navigation with Smooth Gliding Indicator */}
+        <nav className="relative hidden md:flex items-center p-1 rounded-full bg-surface-card/90 border border-purple-500/30 backdrop-blur-2xl shadow-inner shadow-black/30">
+          {/* Smooth Sliding Active Pill */}
+          <div
+            className="absolute top-1 bottom-1 rounded-full bg-brand-violet border border-purple-400/35 shadow-sm shadow-black/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
+            style={{
+              left: `${indicatorStyle.left}px`,
+              width: `${indicatorStyle.width}px`,
+              opacity: indicatorStyle.opacity,
+            }}
+          />
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
+                ref={(el) => {
+                  tabRefs.current[tab.id] = el;
+                }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
+                className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-medium transition-colors duration-250 ${
                   isActive
-                    ? "bg-brand-violet text-white border border-purple-400/35 shadow-sm shadow-black/40 font-semibold scale-100"
-                    : "text-purple-200/80 hover:text-white hover:bg-white/10 hover:scale-105"
+                    ? "text-white font-semibold"
+                    : "text-purple-200/80 hover:text-white"
                 }`}
               >
                 {tab.label}

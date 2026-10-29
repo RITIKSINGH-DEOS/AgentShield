@@ -111,6 +111,7 @@ export default function Home() {
 
         {/* Main Dashboard Canvas - Dynamically Rendered per Tab */}
         <main className="flex-1 max-w-[1440px] w-full mx-auto px-6 py-6 space-y-6">
+          <div key={activeTab} className="tab-content-enter space-y-6">
           {/* Tab 1: OVERVIEW - Executive Cockpit (Clean & Uncluttered) */}
           {activeTab === "overview" && (
             <div className="space-y-6 animate-fadeIn">
@@ -298,6 +299,7 @@ export default function Home() {
           {activeTab === "paypal" && (
             <PayPalSandboxView stats={stats} />
           )}
+          </div>
         </main>
 
         {/* Forensic Audit Modal */}
