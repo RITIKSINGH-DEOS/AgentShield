@@ -67,7 +67,7 @@ export default function HeroOverview({
                 <div key={colIdx} className="flex flex-col gap-1.5 justify-center">
                   {Array.from({ length: matrixRows }).map((_, rowIdx) => {
                     // Constant cascading wave pattern flowing from Left to Right
-                    const cycleDuration = 3.6;
+                    const cycleDuration = 7.5;
                     const colProgress = (colIdx / matrixCols) * cycleDuration;
                     const waveOffset = Math.sin(colIdx * 0.45 + rowIdx * 0.75) * 0.45;
                     const delay = (colProgress + waveOffset + cycleDuration) % cycleDuration;

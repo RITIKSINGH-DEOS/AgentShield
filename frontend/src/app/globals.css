@@ -180,7 +180,7 @@ body {
 }
 
 .animate-matrix-dot {
-  animation: dotMatrixWaveSweep 3.6s ease-in-out infinite;
+  animation: dotMatrixWaveSweep 7.5s ease-in-out infinite;
   will-change: transform, opacity, background-color;
 }
 

@@ -43,7 +43,7 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
             <circle r="3.2" fill="#34d399" style={{ filter: "drop-shadow(0 0 6px #10b981)" }}>
               <animateMotion
                 path="M 0 18 Q 25 4, 50 16 T 100 8"
-                dur="3.2s"
+                dur="7.2s"
                 repeatCount="indefinite"
               />
             </circle>
@@ -85,7 +85,7 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
             <circle r="3.2" fill="#ff3366" style={{ filter: "drop-shadow(0 0 6px #ff3366)" }}>
               <animateMotion
                 path="M 0 14 Q 25 22, 50 6 T 100 12"
-                dur="2.8s"
+                dur="6.5s"
                 repeatCount="indefinite"
               />
             </circle>
@@ -127,7 +127,7 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
             <circle r="3.2" fill="#e9d5ff" style={{ filter: "drop-shadow(0 0 6px #c084fc)" }}>
               <animateMotion
                 path="M 0 18 Q 30 6, 60 18 T 100 10"
-                dur="3.6s"
+                dur="8.0s"
                 repeatCount="indefinite"
               />
             </circle>
@@ -187,7 +187,7 @@ export default function FinOpsStatsCards({ stats }: FinOpsStatsCardsProps) {
             >
               <animateMotion
                 path="M 0 16 Q 25 22, 55 8 T 100 6"
-                dur="3s"
+                dur="7.0s"
                 repeatCount="indefinite"
               />
             </circle>
