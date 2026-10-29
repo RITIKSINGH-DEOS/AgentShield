@@ -6,6 +6,9 @@ import HeroOverview from "@/components/HeroOverview";
 import FinOpsStatsCards from "@/components/FinOpsStatsCards";
 import ScenarioBar from "@/components/ScenarioBar";
 import AgGridLedger from "@/components/AgGridLedger";
+import LedgerView from "@/components/LedgerView";
+import ScenariosView from "@/components/ScenariosView";
+import PayPalSandboxView from "@/components/PayPalSandboxView";
 import InspectorDrawer from "@/components/InspectorDrawer";
 import { LedgerRecord, SystemStats, ScenarioResult } from "@/types";
 import { fetchLedger, fetchStats, runScenario, toggleKillSwitch, resetSystem } from "@/lib/api";
@@ -106,30 +109,62 @@ export default function Home() {
         setActiveTab={setActiveTab}
       />
 
-      {/* Main Dashboard Canvas */}
+      {/* Main Dashboard Canvas - Dynamically Rendered per Tab */}
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-6 py-6 space-y-6">
-        {/* 2. Top Hero: Total Agentic Spend Heatmap + Speedometer Arc Velocity Gauge */}
-        <HeroOverview
-          stats={stats}
-          isKillSwitchActive={stats.circuit_breaker_active}
-          onToggleKillSwitch={handleToggleKillSwitch}
-        />
+        {/* Tab 1: OVERVIEW */}
+        {activeTab === "overview" && (
+          <div className="space-y-6 animate-fadeIn">
+            {/* Top Hero: Total Agentic Spend Heatmap + Speedometer Arc Velocity Gauge */}
+            <HeroOverview
+              stats={stats}
+              isKillSwitchActive={stats.circuit_breaker_active}
+              onToggleKillSwitch={handleToggleKillSwitch}
+            />
 
-        {/* 3. Middle Section: 4 FinOps KPI Cards with Smooth Wave Sparklines */}
-        <FinOpsStatsCards stats={stats} />
+            {/* Middle Section: 4 FinOps KPI Cards with Smooth Wave Sparklines */}
+            <FinOpsStatsCards stats={stats} />
 
-        {/* 4. 1-Click Interactive Scenarios (Clean, decluttered) */}
-        <ScenarioBar
-          onRunScenario={handleRunScenario}
-          runningScenario={runningScenario}
-          lastResult={lastScenarioResult}
-        />
+            {/* 1-Click Interactive Scenarios */}
+            <ScenarioBar
+              onRunScenario={handleRunScenario}
+              runningScenario={runningScenario}
+              lastResult={lastScenarioResult}
+            />
 
-        {/* 5. AG Grid Enterprise Streaming Audit Ledger */}
-        <AgGridLedger
-          records={records}
-          onSelectRecord={(rec) => setSelectedRecord(rec)}
-        />
+            {/* AG Grid Enterprise Streaming Audit Ledger */}
+            <AgGridLedger
+              records={records}
+              onSelectRecord={(rec) => setSelectedRecord(rec)}
+              heightClass="h-[380px]"
+              pageSize={8}
+            />
+          </div>
+        )}
+
+        {/* Tab 2: AUDIT LEDGER */}
+        {activeTab === "ledger" && (
+          <LedgerView
+            records={records}
+            stats={stats}
+            onSelectRecord={(rec) => setSelectedRecord(rec)}
+          />
+        )}
+
+        {/* Tab 3: SCENARIOS */}
+        {activeTab === "scenarios" && (
+          <ScenariosView
+            onRunScenario={handleRunScenario}
+            runningScenario={runningScenario}
+            lastResult={lastScenarioResult}
+            onResetSystem={handleResetSystem}
+            isLoading={isLoading}
+          />
+        )}
+
+        {/* Tab 4: PAYPAL SANDBOX */}
+        {activeTab === "paypal" && (
+          <PayPalSandboxView stats={stats} />
+        )}
       </main>
 
       {/* Forensic Audit Modal */}
