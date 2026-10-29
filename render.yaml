@@ -1,0 +1,51 @@
+# Render Infrastructure-as-Code Blueprint for AgentShield
+# PayPal AI Hackathon 2026 - Best Use of Render Track
+services:
+  # 1. FastAPI Backend Service
+  - type: web
+    name: agentshield-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PROJECT_NAME
+        value: AgentShield
+      - key: ENV
+        value: production
+      - key: MAX_VELOCITY_USD_PER_MINUTE
+        value: "100.00"
+      - key: MAX_TRANSACTION_LIMIT_USD
+        value: "50.00"
+      - key: MAX_DRIFT_THRESHOLD
+        value: "0.25"
+      - key: AUTOMATIC_KILL_SWITCH_ENABLED
+        value: "true"
+      - key: PAYPAL_MODE
+        value: sandbox
+      - key: PAYPAL_BASE_URL
+        value: https://api-m.sandbox.paypal.com
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+
+  # 2. Next.js 14 Frontend Service with AG Grid Enterprise
+  - type: web
+    name: agentshield-frontend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_VERSION
+        value: 20.14.0
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: agentshield-backend
+          property: host
