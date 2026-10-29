@@ -4,14 +4,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import Header from "@/components/Header";
 import HeroOverview from "@/components/HeroOverview";
 import FinOpsStatsCards from "@/components/FinOpsStatsCards";
-import ScenarioBar from "@/components/ScenarioBar";
-import AgGridLedger from "@/components/AgGridLedger";
 import LedgerView from "@/components/LedgerView";
 import ScenariosView from "@/components/ScenariosView";
 import PayPalSandboxView from "@/components/PayPalSandboxView";
 import InspectorDrawer from "@/components/InspectorDrawer";
 import { LedgerRecord, SystemStats, ScenarioResult } from "@/types";
 import { fetchLedger, fetchStats, runScenario, toggleKillSwitch, resetSystem } from "@/lib/api";
+import { ShieldCheck, FileSpreadsheet, Play } from "lucide-react";
 
 export default function Home() {
   const [records, setRecords] = useState<LedgerRecord[]>([]);
@@ -111,7 +110,7 @@ export default function Home() {
 
       {/* Main Dashboard Canvas - Dynamically Rendered per Tab */}
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-6 py-6 space-y-6">
-        {/* Tab 1: OVERVIEW */}
+        {/* Tab 1: OVERVIEW - Executive Cockpit (Clean & Uncluttered) */}
         {activeTab === "overview" && (
           <div className="space-y-6 animate-fadeIn">
             {/* Top Hero: Total Agentic Spend Heatmap + Speedometer Arc Velocity Gauge */}
@@ -124,24 +123,157 @@ export default function Home() {
             {/* Middle Section: 4 FinOps KPI Cards with Smooth Wave Sparklines */}
             <FinOpsStatsCards stats={stats} />
 
-            {/* 1-Click Interactive Scenarios */}
-            <ScenarioBar
-              onRunScenario={handleRunScenario}
-              runningScenario={runningScenario}
-              lastResult={lastScenarioResult}
-            />
+            {/* Bottom Grid: FinOps Security Gates + Quick Module Navigation */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              {/* Left: 4 FinOps Security Gates (Zero-Trust Pipeline) */}
+              <div className="lg:col-span-7 p-6 rounded-3xl glass-card flex flex-col justify-between border-purple-500/15">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-brand-purple" />
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                        Autonomous Security Pipeline
+                      </h4>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      Zero-Trust Air Gap
+                    </span>
+                  </div>
 
-            {/* AG Grid Enterprise Streaming Audit Ledger */}
-            <AgGridLedger
-              records={records}
-              onSelectRecord={(rec) => setSelectedRecord(rec)}
-              heightClass="h-[380px]"
-              pageSize={8}
-            />
+                  <div className="space-y-2.5">
+                    <div className="p-3 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-mono font-bold">
+                          1
+                        </span>
+                        <div>
+                          <p className="text-xs font-semibold text-white">Cryptographic Proof-of-Intent</p>
+                          <p className="text-[11px] text-purple-300/50">SHA-256 deterministic intent hashing before payout</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-400 font-bold">VERIFIED</span>
+                    </div>
+
+                    <div className="p-3 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-mono font-bold">
+                          2
+                        </span>
+                        <div>
+                          <p className="text-xs font-semibold text-white">Cosine Semantic Drift Engine</p>
+                          <p className="text-[11px] text-purple-300/50">Adversarial prompt injection &amp; jailbreak quarantine (&lt;18ms)</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-400 font-bold">ARMED</span>
+                    </div>
+
+                    <div className="p-3 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-mono font-bold">
+                          3
+                        </span>
+                        <div>
+                          <p className="text-xs font-semibold text-white">Sliding-Window Velocity Breaker</p>
+                          <p className="text-[11px] text-purple-300/50">Autonomous runaway loop trip switch ($100/min cap)</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-400 font-bold">MONITORED</span>
+                    </div>
+
+                    <div className="p-3 rounded-2xl bg-surface-canvas/60 border border-purple-500/10 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-mono font-bold">
+                          4
+                        </span>
+                        <div>
+                          <p className="text-xs font-semibold text-white">PayPal Developer Platform</p>
+                          <p className="text-[11px] text-purple-300/50">Payouts v1 &amp; Orders v2 micro-disbursements</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono text-emerald-400 font-bold">ONLINE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Quick Module Switcher */}
+              <div className="lg:col-span-5 p-6 rounded-3xl glass-card flex flex-col justify-between border-purple-500/15">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                      Module Navigation
+                    </h4>
+                    <span className="text-[10px] font-mono text-purple-300/50">1-Click Jump</span>
+                  </div>
+
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setActiveTab("ledger")}
+                      className="w-full p-3 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/30 text-left transition-all flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300 group-hover:text-white group-hover:bg-brand-violet transition-colors">
+                          <FileSpreadsheet className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-white group-hover:text-purple-200 transition-colors">
+                            Audit Ledger (AG Grid)
+                          </p>
+                          <p className="text-[11px] text-purple-300/50">Immutable telemetry &amp; CSV export</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        &rarr;
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab("scenarios")}
+                      className="w-full p-3 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/30 text-left transition-all flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300 group-hover:text-white group-hover:bg-brand-violet transition-colors">
+                          <Play className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-white group-hover:text-purple-200 transition-colors">
+                            Evaluator Scenarios
+                          </p>
+                          <p className="text-[11px] text-purple-300/50">4 live attack vector simulations</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        &rarr;
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab("paypal")}
+                      className="w-full p-3 rounded-2xl bg-surface-canvas/60 hover:bg-surface-card-hover border border-purple-500/10 hover:border-purple-500/30 text-left transition-all flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-[#003087]/20 border border-[#0070BA]/30 flex items-center justify-center text-cyan-300 group-hover:bg-[#0070BA]/40 transition-colors">
+                          <span className="text-xs font-black italic font-mono">P</span>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
+                            PayPal Sandbox Console
+                          </p>
+                          <p className="text-[11px] text-purple-300/50">Live REST endpoints &amp; webhooks</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-mono text-purple-300/60 group-hover:translate-x-1 transition-transform">
+                        &rarr;
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Tab 2: AUDIT LEDGER */}
+        {/* Tab 2: AUDIT LEDGER - Dedicated AG Grid Enterprise View */}
         {activeTab === "ledger" && (
           <LedgerView
             records={records}
@@ -150,7 +282,7 @@ export default function Home() {
           />
         )}
 
-        {/* Tab 3: SCENARIOS */}
+        {/* Tab 3: SCENARIOS - Dedicated Evaluator Test Workbench */}
         {activeTab === "scenarios" && (
           <ScenariosView
             onRunScenario={handleRunScenario}
@@ -161,7 +293,7 @@ export default function Home() {
           />
         )}
 
-        {/* Tab 4: PAYPAL SANDBOX */}
+        {/* Tab 4: PAYPAL SANDBOX - Dedicated PayPal Platform View */}
         {activeTab === "paypal" && (
           <PayPalSandboxView stats={stats} />
         )}
