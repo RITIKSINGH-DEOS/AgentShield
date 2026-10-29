@@ -26,12 +26,12 @@ export default function HeroOverview({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
       {/* 1. Left Card: Total Agentic Spend & Telemetry Stream (Span 8) */}
-      <div className="lg:col-span-8 p-6 rounded-3xl glass-card relative overflow-hidden flex flex-col justify-between">
+      <div className="lg:col-span-8 p-6 rounded-3xl glass-card glass-card-interactive relative overflow-hidden flex flex-col justify-between">
         <div>
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-brand-purple">
+              <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-brand-purple shadow-sm">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <span className="text-xs font-semibold text-purple-200/80 tracking-wide">
@@ -50,7 +50,7 @@ export default function HeroOverview({
             <h2 className="text-4xl font-extrabold tracking-tight text-white font-mono">
               ${stats.total_spent_usd.toFixed(2)}
             </h2>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 shadow-sm">
               <ArrowUpRight className="w-3 h-3" />
               {stats.total_transactions} Verified Transactions
             </span>
@@ -71,8 +71,8 @@ export default function HeroOverview({
                     const isActive = isFuchsia || isPurple;
                     const opacity = isActive
                       ? isFuchsia
-                        ? "bg-fuchsia-400 shadow-sm shadow-fuchsia-500/40"
-                        : "bg-purple-500/80 shadow-sm shadow-purple-500/30"
+                        ? "bg-fuchsia-400 shadow-sm shadow-fuchsia-500/50"
+                        : "bg-purple-500/80 shadow-sm shadow-purple-500/40"
                       : "bg-purple-950/40";
 
                     return (
@@ -99,12 +99,12 @@ export default function HeroOverview({
       </div>
 
       {/* 2. Right Card: Speedometer Arc Gauge (Span 4) */}
-      <div className="lg:col-span-4 p-6 rounded-3xl glass-card flex flex-col justify-between">
+      <div className="lg:col-span-4 p-6 rounded-3xl glass-card glass-card-interactive flex flex-col justify-between">
         <div>
           {/* Header with Auto-Kill Toggle */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-brand-purple">
+              <div className="w-7 h-7 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-brand-purple shadow-sm">
                 <Target className="w-4 h-4" />
               </div>
               <span className="text-xs font-semibold text-purple-200/80">Velocity Limit</span>
@@ -115,7 +115,7 @@ export default function HeroOverview({
               <span className="text-[11px] text-purple-300/60 font-mono">Auto-kill</span>
               <button
                 onClick={onToggleKillSwitch}
-                className={`w-10 h-5 rounded-full p-0.5 transition-colors duration-200 ease-in-out relative ${
+                className={`w-10 h-5 rounded-full p-0.5 transition-colors duration-200 ease-in-out relative shadow-inner ${
                   isKillSwitchActive ? "bg-purple-600" : "bg-purple-950/70 border border-purple-500/30"
                 }`}
               >
@@ -128,70 +128,79 @@ export default function HeroOverview({
             </div>
           </div>
 
-          {/* Speedometer Radial Gauge */}
-          <div className="relative flex flex-col items-center justify-center my-2">
-            <span className="text-3xl font-extrabold text-white font-mono mb-1">
-              ${stats.velocity_1min_usd.toFixed(2)}
-            </span>
-            <span className="text-[11px] text-purple-300/50 uppercase tracking-widest font-mono mb-2">
-              Per-Minute Velocity
-            </span>
+          {/* Speedometer Percentage and Subtitle */}
+          <div className="text-center mt-2 mb-4">
+            <div className="text-3xl font-extrabold text-white font-mono tracking-tight">
+              {velocityPercentage}%
+            </div>
+            <div className="text-[11px] text-purple-300/50 mt-0.5">
+              ${stats.velocity_1min_usd.toFixed(2)} / $100.00 min cap
+            </div>
+          </div>
 
-            {/* Semi-Circle Speedometer SVG */}
-            <div className="relative w-48 h-24 overflow-hidden">
-              <svg viewBox="0 0 100 50" className="w-full h-full">
-                <path
-                  d="M 10 50 A 40 40 0 0 1 90 50"
-                  fill="none"
-                  stroke="#261b46"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M 10 50 A 40 40 0 0 1 90 50"
-                  fill="none"
-                  stroke="url(#purpleGradient)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeDasharray="125.6"
-                  strokeDashoffset={125.6 - (125.6 * velocityPercentage) / 100}
-                />
-                <defs>
-                  <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#6366f1" />
-                    <stop offset="50%" stopColor="#a855f7" />
-                    <stop offset="100%" stopColor="#d946ef" />
-                  </linearGradient>
-                </defs>
-              </svg>
+          {/* Glowing Arc Speedometer SVG */}
+          <div className="relative flex justify-center items-center py-2">
+            <svg viewBox="0 0 200 120" className="w-52 h-32 overflow-visible">
+              <defs>
+                <linearGradient id="speedometerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8b5cf6" />
+                  <stop offset="70%" stopColor="#a855f7" />
+                  <stop offset="100%" stopColor="#d946ef" />
+                </linearGradient>
+                <filter id="arcGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
 
-              {/* Glowing Needle Indicator */}
-              <div
-                className="absolute bottom-0 left-1/2 w-1 h-20 bg-gradient-to-t from-transparent via-purple-300 to-white origin-bottom transform transition-all duration-700 shadow-md shadow-fuchsia-500/50 rounded-full"
-                style={{
-                  transform: `translateX(-50%) rotate(${
-                    (velocityPercentage / 100) * 180 - 90
-                  }deg)`,
-                }}
+              {/* Background Inactive Track */}
+              <path
+                d="M 25 100 A 75 75 0 0 1 175 100"
+                fill="none"
+                stroke="rgba(168, 85, 247, 0.15)"
+                strokeWidth="12"
+                strokeLinecap="round"
               />
-            </div>
 
-            <div className="w-full flex justify-between text-[10px] text-purple-300/40 font-mono px-6 mt-1">
-              <span>$0</span>
-              <span>$50</span>
-              <span>$100.00/min Limit</span>
-            </div>
+              {/* Active Glowing Arc Track */}
+              <path
+                d="M 25 100 A 75 75 0 0 1 175 100"
+                fill="none"
+                stroke="url(#speedometerGradient)"
+                strokeWidth="12"
+                strokeLinecap="round"
+                strokeDasharray="235.6"
+                strokeDashoffset={235.6 - (235.6 * velocityPercentage) / 100}
+                filter="url(#arcGlow)"
+                className="transition-all duration-700 ease-out"
+              />
+
+              {/* Center Pivot Point */}
+              <circle cx="100" cy="100" r="5" fill="#c084fc" filter="url(#arcGlow)" />
+            </svg>
+          </div>
+
+          {/* Scale Labels: 0 and 100 */}
+          <div className="flex justify-between items-center text-[10px] text-purple-300/40 font-mono px-6 -mt-2">
+            <span>0</span>
+            <span>100</span>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="pt-3 border-t border-purple-500/10 flex justify-between items-center text-xs text-purple-300/60">
-          <span className="flex items-center gap-1.5">
+        {/* Bottom Status Pill */}
+        <div className="mt-4 pt-3 border-t border-purple-500/10 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-1.5 text-purple-200">
             <Zap className="w-3.5 h-3.5 text-brand-purple" />
-            <span>&lt;18ms Hardware Trip</span>
-          </span>
-          <span className="text-brand-violet font-mono text-[11px]">
-            {stats.circuit_breaker_active ? "TRIPPED" : "HEALTHY"}
+            <span className="font-mono text-[11px]">Sliding Window</span>
+          </div>
+          <span
+            className={`font-mono text-[10px] px-2 py-0.5 rounded-full border shadow-sm ${
+              isKillSwitchActive
+                ? "bg-danger/15 text-danger border-danger/30"
+                : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+            }`}
+          >
+            {isKillSwitchActive ? "TRIPPED" : "NOMINAL"}
           </span>
         </div>
       </div>

@@ -99,7 +99,7 @@ export default function ScenariosView({
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Top Banner */}
-      <div className="p-6 rounded-3xl glass-card flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-purple-500/20">
+      <div className="p-6 rounded-3xl glass-card glass-card-interactive flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-purple-500/20">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-brand-violet/20 border border-brand-violet/30 flex items-center justify-center text-purple-300 shadow-lg shadow-purple-500/10">
             <Activity className="w-6 h-6 text-brand-purple" />
@@ -107,7 +107,7 @@ export default function ScenariosView({
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-base font-bold text-white">Evaluator Test Scenarios</h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30 shadow-sm">
                 LIVE HARNESS
               </span>
             </div>
@@ -120,7 +120,7 @@ export default function ScenariosView({
         <button
           onClick={onResetSystem}
           disabled={isLoading}
-          className="px-4 py-2 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border text-xs text-purple-200 flex items-center gap-2 transition-colors font-medium"
+          className="px-4 py-2 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-border text-xs text-purple-200 flex items-center gap-2 transition-all font-medium interactive-pill"
         >
           <RefreshCw className={`w-3.5 h-3.5 text-brand-purple ${isLoading ? "animate-spin" : ""}`} />
           <span>Reset Test Suite</span>
@@ -136,12 +136,12 @@ export default function ScenariosView({
           return (
             <div
               key={sc.id}
-              className="p-5 rounded-3xl glass-card border border-purple-500/15 hover:border-purple-500/35 transition-all duration-200 flex flex-col justify-between"
+              className="p-5 rounded-3xl glass-card glass-card-interactive border border-purple-500/15 hover:border-purple-500/35 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${sc.accentColor}`}>
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${sc.accentColor} shadow-sm`}>
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -151,7 +151,7 @@ export default function ScenariosView({
                       <h4 className="text-sm font-bold text-white">{sc.title}</h4>
                     </div>
                   </div>
-                  <span className={`text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full border ${sc.accentColor}`}>
+                  <span className={`text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full border ${sc.accentColor} shadow-sm`}>
                     {sc.cost}
                   </span>
                 </div>
@@ -169,7 +169,7 @@ export default function ScenariosView({
               <button
                 onClick={() => onRunScenario(sc.id)}
                 disabled={runningScenario !== null}
-                className={`w-full py-2.5 px-4 rounded-xl bg-surface-border hover:bg-brand-violet hover:text-white text-xs font-semibold text-purple-200 flex items-center justify-center gap-2 transition-all shadow-md ${sc.btnColor}`}
+                className={`w-full py-2.5 px-4 rounded-xl bg-surface-border hover:bg-brand-violet hover:text-white text-xs font-semibold text-purple-200 flex items-center justify-center gap-2 transition-all shadow-md interactive-pill ${sc.btnColor}`}
               >
                 {isRunning ? (
                   <>
@@ -189,7 +189,7 @@ export default function ScenariosView({
       </div>
 
       {/* Live Execution Forensic Terminal */}
-      <div className="p-6 rounded-3xl glass-card border-purple-500/20 space-y-4">
+      <div className="p-6 rounded-3xl glass-card glass-card-interactive border-purple-500/20 space-y-4">
         <div className="flex items-center justify-between border-b border-purple-500/10 pb-3">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-brand-purple" />
@@ -201,7 +201,7 @@ export default function ScenariosView({
           {lastResult && (
             <button
               onClick={() => setShowRawJson(!showRawJson)}
-              className="text-xs font-mono text-purple-300/60 hover:text-purple-200 flex items-center gap-1.5"
+              className="text-xs font-mono text-purple-300/60 hover:text-purple-200 flex items-center gap-1.5 transition-colors"
             >
               <Code2 className="w-3.5 h-3.5" />
               <span>{showRawJson ? "Show Card View" : "Show Raw JSON"}</span>
