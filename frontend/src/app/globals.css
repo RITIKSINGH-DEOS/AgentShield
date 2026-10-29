@@ -106,6 +106,49 @@ body {
 }
 
 /* ==========================================================================
+   DYNAMIC 3D WAVE MOTION & OSCILLOSCOPE FLOW (LEFT TO RIGHT)
+   ========================================================================== */
+@keyframes waveFlowLeftToRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes wavePulseGlow {
+  0%, 100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+}
+
+.animate-wave-flow-1 {
+  animation: waveFlowLeftToRight 5s linear infinite;
+  will-change: transform;
+}
+
+.animate-wave-flow-2 {
+  animation: waveFlowLeftToRight 3.6s linear infinite;
+  will-change: transform;
+}
+
+.animate-wave-flow-3 {
+  animation: waveFlowLeftToRight 6.2s linear infinite;
+  will-change: transform;
+}
+
+.animate-wave-flow-4 {
+  animation: waveFlowLeftToRight 4.5s linear infinite;
+  will-change: transform;
+}
+
+/* ==========================================================================
    CUSTOM AG GRID LUXURY PURPLE QUARTZ OVERRIDES (BRIGHTENED)
    ========================================================================== */
 .ag-theme-quartz-dark {
