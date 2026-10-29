@@ -34,7 +34,7 @@ export default function Header({
       <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
         {/* Brand Logo with 3D Specular Glow */}
         <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setActiveTab("overview")}>
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-fuchsia flex items-center justify-center shadow-lg shadow-purple-500/40 group-hover:scale-105 transition-transform duration-300">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-fuchsia flex items-center justify-center shadow-sm shadow-black/40 border border-purple-400/30 group-hover:scale-105 transition-transform duration-300">
             <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -59,7 +59,7 @@ export default function Header({
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-brand-violet text-white shadow-lg shadow-purple-600/50 font-semibold scale-100"
+                    ? "bg-brand-violet text-white border border-purple-400/35 shadow-sm shadow-black/40 font-semibold scale-100"
                     : "text-purple-200/80 hover:text-white hover:bg-white/10 hover:scale-105"
                 }`}
               >
@@ -73,7 +73,7 @@ export default function Header({
         <div className="flex items-center gap-2.5">
           {/* PayPal Sandbox Status Badge */}
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-950/50 border border-purple-500/30 text-[11px] font-mono text-purple-200 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse " />
             <span>PayPal Sandbox Live</span>
           </div>
 
@@ -83,7 +83,7 @@ export default function Header({
             disabled={isLoading}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all interactive-pill ${
               isKillSwitchActive
-                ? "bg-danger/25 border-danger/60 text-danger shadow-lg shadow-danger/30"
+                ? "bg-danger/25 border-danger/60 text-danger shadow-sm shadow-black/30"
                 : "bg-surface-card hover:bg-surface-card-hover border-purple-500/30 text-slate-200 hover:text-white"
             }`}
           >
