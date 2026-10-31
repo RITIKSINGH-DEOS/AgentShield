@@ -45,6 +45,17 @@ export default function Home() {
     }
   }, []);
 
+  // Read initial tab from URL query parameter
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam && ['overview', 'ledger', 'scenarios', 'paypal'].includes(tabParam)) {
+        setActiveTab(tabParam);
+      }
+    }
+  }, []);
+
   // Initial load and periodic live polling
   useEffect(() => {
     refreshData();
